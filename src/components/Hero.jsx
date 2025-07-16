@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import image from '../../public/assets/Profile.jpeg'; // Adjust the path as necessary
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 const Hero = () => {
   const [imageError, setImageError] = useState(false);
   
-  const profileImageUrl = "/src/assets/Profile.jpeg"; 
+  const profileImageUrl = image; 
   
   const handleImageError = () => {
     setImageError(true);
