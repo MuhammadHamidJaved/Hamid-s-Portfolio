@@ -43,11 +43,11 @@ const Hero = () => {
                 </span>
               </h1>
               <h2 className={`h3 mb-4 text-muted fade-in-left stagger-1 ${isTypingComplete ? 'show-subtitle' : 'hide-subtitle'}`}>
-                ML Student at NUCES (FAST) • Intern at Analyzinn Solutions
+                ML Student at NUCES (FAST) • Former Intern at Analyzinn Solutions
               </h2>
               <p className={`lead mb-4 fade-in-left stagger-2 ${isTypingComplete ? 'show-subtitle' : 'hide-subtitle'}`}>
                 Computer Science student passionate about Machine Learning and Full Stack Development. 
-                Currently interning at Analyzinn Solutions and building innovative AI-powered applications 
+                Former intern at Analyzinn Solutions, now building innovative AI-powered applications 
                 that solve real-world problems.
               </p>
               <div className={`profile-info mb-4 fade-in-left stagger-3 ${isTypingComplete ? 'show-subtitle' : 'hide-subtitle'}`}>
@@ -58,7 +58,7 @@ const Hero = () => {
                   </span>
                   <span className="badge bg-light text-dark me-2 mb-2 p-2">
                     <i className="fas fa-building me-1"></i>
-                    Intern at Analyzinn Solutions
+                    Former Intern at Analyzinn Solutions
                   </span>
                   <span className="badge bg-light text-dark mb-2 p-2">
                     <i className="fas fa-map-marker-alt me-1"></i>

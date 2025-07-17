@@ -1,25 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 
 const Resume = () => {
+  const [isDownloading, setIsDownloading] = useState(false);
+  
   // Download resume function
-  const handleDownloadResume = () => {
+  const handleDownloadResume = async () => {
+    setIsDownloading(true);
+    
     try {
-      const resumeUrl = '/Muhammad_Hamid_Javed_Resume.pdf';
-      const link = document.createElement('a');
-      link.href = resumeUrl;
-      link.download = 'Muhammad_Hamid_Javed_Resume.pdf';
-      link.target = '_blank'; // Open in new tab as fallback
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const resumeUrl = `${window.location.origin}/Muhammad_Hamid_Javed_Resume.pdf`;
+      const htmlResumeUrl = `${window.location.origin}/resume-template.html`;
       
-      // Optional: Show success message
-      console.log('Resume download initiated');
+      // Method 1: Try PDF download first
+      try {
+        const response = await fetch(resumeUrl);
+        if (response.ok) {
+          const blob = await response.blob();
+          // Check if PDF has content (more than 1KB)
+          if (blob.size > 1024) {
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Muhammad_Hamid_Javed_Resume.pdf';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+            
+            setTimeout(() => {
+              setIsDownloading(false);
+            }, 1000);
+            
+            console.log('PDF resume download completed successfully');
+            return;
+          } else {
+            console.log('PDF is too small, likely empty. Trying HTML version...');
+          }
+        }
+      } catch (fetchError) {
+        console.log('PDF fetch failed, trying HTML version...');
+      }
+      
+      // Method 2: Download HTML version and suggest PDF conversion
+      try {
+        const htmlResponse = await fetch(htmlResumeUrl);
+        if (htmlResponse.ok) {
+          const htmlBlob = await htmlResponse.blob();
+          const url = window.URL.createObjectURL(htmlBlob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'Muhammad_Hamid_Javed_Resume.html';
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+          
+          setTimeout(() => {
+            setIsDownloading(false);
+            alert('HTML resume downloaded! You can open it in your browser and print/save as PDF, or I can help you convert it to PDF.');
+          }, 1000);
+          
+          console.log('HTML resume download completed successfully');
+          return;
+        }
+      } catch (htmlError) {
+        console.log('HTML version also failed');
+      }
+      
+      // Method 3: Open HTML in new tab as final fallback
+      window.open(htmlResumeUrl, '_blank');
+      setTimeout(() => {
+        setIsDownloading(false);
+        alert('Resume opened in new tab. You can print or save it as PDF from there.');
+      }, 1000);
+      
     } catch (error) {
-      console.error('Error downloading resume:', error);
-      // Fallback: open in new tab
-      window.open('/Muhammad_Hamid_Javed_Resume.pdf', '_blank');
+      console.error('Error in download function:', error);
+      setIsDownloading(false);
+      alert('Unable to download resume. Please contact me directly for my resume.');
     }
   };
 
@@ -51,8 +112,8 @@ const Resume = () => {
     {
       title: "Software Development Intern",
       company: "Analyzinn Solutions",
-      period: "2024 - Present",
-      description: "Working on software development projects and gaining hands-on experience in modern web technologies and business solutions.",
+      period: "July, 2024 - August, 2024",
+      description: "Completed software development internship gaining hands-on experience in modern web technologies and business solutions.",
       achievements: [
         "Developed web applications using React and Node.js",
         "Collaborated with senior developers on client projects",
@@ -90,6 +151,18 @@ const Resume = () => {
       issuer: "FAST NUCES, Lahore",
       date: "2023-2024",
       credentialId: "Academic Excellence (x2)"
+    },
+    {
+      name: "Python Course",
+      issuer: "GeeksforGeeks",
+      date: "2023",
+      credentialId: "Programming Certification"
+    },
+    {
+      name: "TensorFlow Course",
+      issuer: "GeeksforGeeks",
+      date: "2023",
+      credentialId: "Machine Learning Certification"
     },
     {
       name: "Kotlin Course",
@@ -162,9 +235,21 @@ const Resume = () => {
               size="lg" 
               onClick={handleDownloadResume}
               className="mb-4"
+              disabled={isDownloading}
             >
-              <i className="fas fa-download me-2"></i>
-              Download PDF Resume
+              {isDownloading ? (
+                <>
+                  <div className="spinner-border spinner-border-sm me-2" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                  Preparing Download...
+                </>
+              ) : (
+                <>
+                  <i className="fas fa-download me-2"></i>
+                  Download HTML Resume
+                </>
+              )}
             </Button>
           </Col>
         </Row>

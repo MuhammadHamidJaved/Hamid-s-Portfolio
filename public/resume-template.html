@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Hamid Javed - Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: white;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #20c997;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .header .title {
+            font-size: 1.1rem;
+            color: #20c997;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #20c997;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .experience-item, .education-item, .project-item {
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 3px solid #e9ecef;
+        }
+        
+        .experience-item:hover, .education-item:hover, .project-item:hover {
+            border-left-color: #20c997;
+            transition: border-left-color 0.3s ease;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .item-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .item-company {
+            color: #20c997;
+            font-weight: 500;
+        }
+        
+        .item-period {
+            color: #666;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .item-description {
+            color: #555;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .achievements {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .achievements li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .achievements li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #20c997;
+            font-weight: bold;
+        }
+        
+        .grade {
+            color: #20c997;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px;
+        }
+        
+        .tech-tag {
+            background: #f8f9fa;
+            color: #20c997;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            border: 1px solid #e9ecef;
+        }
+        
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .cert-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #20c997;
+        }
+        
+        .cert-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .cert-issuer {
+            color: #20c997;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+        
+        .cert-date {
+            color: #666;
+            font-size: 0.8rem;
+        }
+        
+        .skills-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-category h3 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .skill-list {
+            list-style: none;
+            text-align: center;
+        }
+        
+        .skill-list li {
+            padding: 3px 0;
+            color: #555;
+        }
+        
+        .skill-text {
+            color: #555;
+            line-height: 1.4;
+            text-align: center;
+            margin-top: 5px;
+        }
+        
+        @media print {
+            body {
+                padding: 20px;
+                font-size: 11px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                margin-bottom: 20px;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Muhammad Hamid Javed</h1>
+        <div class="title">Computer Science Student • ML Enthusiast • Software Developer</div>
+        <div class="contact-info">
+            <span>📍 Lahore, Pakistan</span>
+            <span>🎓 FAST NUCES - Batch 2026</span>
+            <span> 📞 0321-1418038</span>
+            <span>🔗 LinkedIn: muhammad-hamid-javed-6aa8412b1</span>
+            <span>💻 GitHub: MuhammadHamidJaved</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🎯 Objective</h2>
+        <div class="objective-text" style="color: #555; line-height: 1.5; margin-bottom: 15px;">
+            Motivated Computer Science student with strong foundation in Machine Learning, Full-Stack Development, and Mobile Application Development. Seeking opportunities to apply technical skills in Python, Java, Kotlin, and modern web technologies to solve real-world problems. Experienced in developing AI-powered applications, including medical chatbots and emotion recognition systems. Passionate about continuous learning and contributing to innovative software solutions in a collaborative team environment.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📚 Education</h2>
+        
+        <div class="education-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">BS (Computer Science)</div>
+                    <div class="item-company">FAST NUCES, Lahore</div>
+                </div>
+                <div class="item-period">July 2022 – Present</div>
+            </div>
+            <div class="item-description">
+                Currently pursuing Computer Science with focus on Machine Learning, Software Engineering, and Data Structures & Algorithms.
+            </div>
+            <div class="grade">CGPA: 3.38 / 4.0</div>
+        </div>
+
+        <div class="education-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">Intermediate</div>
+                    <div class="item-company">Government College University, Lahore</div>
+                </div>
+                <div class="item-period">2020 – 2022</div>
+            </div>
+            <div class="item-description">
+                Pre-engineering studies with strong foundation in Mathematics, Physics, and Chemistry.
+            </div>
+            <div class="grade">Percentage: 90.27%</div>
+        </div>
+
+        <div class="education-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">Matriculation</div>
+                    <div class="item-company">Qazi Grammar Boys High School, Lahore</div>
+                </div>
+                <div class="item-period">2018 – 2020</div>
+            </div>
+            <div class="item-description">
+                Secondary education with excellent academic performance and strong foundation in core subjects.
+            </div>
+            <div class="grade">Percentage: 93.90%</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>💼 Experience</h2>
+        
+        <div class="experience-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">Software Development Intern</div>
+                    <div class="item-company">Analyzinn Solutions</div>
+                </div>
+                <div class="item-period">2024</div>
+            </div>
+            <div class="item-description">
+                Completed software development internship gaining hands-on experience in modern web technologies and business solutions.
+            </div>
+            <ul class="achievements">
+                <li>Developed web applications using React and Node.js</li>
+                <li>Collaborated with senior developers on client projects</li>
+                <li>Gained experience in professional software development practices</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">ML Student & Self-Directed Learner</div>
+                    <div class="item-company">Personal Projects & Studies</div>
+                </div>
+                <div class="item-period">2022 - Present</div>
+            </div>
+            <div class="item-description">
+                Intensive study and practice in machine learning, web development, and mobile app development.
+            </div>
+            <ul class="achievements">
+                <li>Built multiple full-stack applications using modern technologies</li>
+                <li>Developed AI-powered applications including chatbots and analysis tools</li>
+                <li>Mastered multiple programming languages and frameworks</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🚀 Key Projects</h2>
+        
+        <div class="project-item">
+            <div class="item-header">
+                <div class="item-title">Medical Chatbot</div>
+            </div>
+            <div class="item-description">
+                AI-powered medical chatbot using RAG architecture with Google Gemini AI and Pinecone vector store for comprehensive medical assistance.
+            </div>
+            <div class="technologies">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Streamlit</span>
+                <span class="tech-tag">Google Gemini AI</span>
+                <span class="tech-tag">Pinecone</span>
+                <span class="tech-tag">RAG</span>
+                <span class="tech-tag">LangChain</span>
+            </div>
+        </div>
+
+        <div class="project-item">
+            <div class="item-header">
+                <div class="item-title">Emotion Recognition System</div>
+            </div>
+            <div class="item-description">
+                AI-powered facial emotion recognition system using computer vision and machine learning for real-time emotion detection and analysis.
+            </div>
+            <div class="technologies">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">OpenCV</span>
+                <span class="tech-tag">TensorFlow</span>
+                <span class="tech-tag">Keras</span>
+                <span class="tech-tag">Computer Vision</span>
+                <span class="tech-tag">Deep Learning</span>
+            </div>
+        </div>
+
+        <div class="project-item">
+            <div class="item-header">
+                <div class="item-title">AI Resume Analyzer</div>
+            </div>
+            <div class="item-description">
+                Sophisticated ML-powered resume analysis platform with multiple trained models for scoring and experience prediction.
+            </div>
+            <div class="technologies">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Streamlit</span>
+                <span class="tech-tag">Machine Learning</span>
+                <span class="tech-tag">OpenAI API</span>
+                <span class="tech-tag">Scikit-learn</span>
+            </div>
+        </div>
+
+        <div class="project-item">
+            <div class="item-header">
+                <div class="item-title">BudgetBuddy - Finance Management App</div>
+            </div>
+            <div class="item-description">
+                Comprehensive Android personal finance management app with expense tracking, budget alerts, and visual analytics.
+            </div>
+            <div class="technologies">
+                <span class="tech-tag">Kotlin</span>
+                <span class="tech-tag">Android</span>
+                <span class="tech-tag">Firebase</span>
+                <span class="tech-tag">Firestore</span>
+                <span class="tech-tag">MPAndroidChart</span>
+            </div>
+        </div>
+
+        <div class="project-item">
+            <div class="item-header">
+                <div class="item-title">Streamify - Full-Stack Streaming Platform</div>
+            </div>
+            <div class="item-description">
+                Full-stack streaming platform with social media features, real-time communication, and movie streaming.
+            </div>
+            <div class="technologies">
+                <span class="tech-tag">Django</span>
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">WebSocket</span>
+                <span class="tech-tag">JWT</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🏆 Certifications & Achievements</h2>
+        
+        <div class="certifications-grid">
+            <div class="cert-item">
+                <div class="cert-name">Software Engineer Intern</div>
+                <div class="cert-issuer">Analyzinn Solutions</div>
+                <div class="cert-date">2024</div>
+            </div>
+            
+            <div class="cert-item">
+                <div class="cert-name">Dean's List Award (x2)</div>
+                <div class="cert-issuer">FAST NUCES, Lahore</div>
+                <div class="cert-date">Fall 2024, Spring 2025</div>
+            </div>
+            
+            <div class="cert-item">
+                <div class="cert-name">Softec Participation Certificate</div>
+                <div class="cert-issuer">FAST University</div>
+                <div class="cert-date">2024</div>
+            </div>
+            
+            <div class="cert-item">
+                <div class="cert-name">Python Course</div>
+                <div class="cert-issuer">GeeksforGeeks</div>
+                <div class="cert-date">2025</div>
+            </div>
+            
+            <div class="cert-item">
+                <div class="cert-name">TensorFlow Course</div>
+                <div class="cert-issuer">GeeksforGeeks</div>
+                <div class="cert-date">2025</div>
+            </div>
+            
+            <div class="cert-item">
+                <div class="cert-name">Kotlin Programming Course</div>
+                <div class="cert-issuer">Online Platform</div>
+                <div class="cert-date">2023</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>💻 Technical Skills</h2>
+        
+        <div class="skills-section">
+            <div class="skill-category">
+                <h3>Programming</h3>
+                <div class="skill-text">Java, Kotlin, Python, C++</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Mobile Development</h3>
+                <div class="skill-text">Android SDK, XML</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Machine Learning & AI</h3>
+                <div class="skill-text">TensorFlow, Keras, OpenCV, Computer Vision, Deep Learning, NLP, Scikit-learn, Data Analysis</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Database</h3>
+                <div class="skill-text">Firebase</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Tools & Platforms</h3>
+                <div class="skill-text">Git, GitHub, Android Studio, Jupyter Notebook, Google Colab</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Other Technical Skills</h3>
+                <div class="skill-text">Data Structures, OOP, Database, Algorithms, Software Design and Analysis, REST APIs, Responsive Design, Agile Methodology, HTML, CSS, JavaScript, React.js, Node.js</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Soft Skills</h3>
+                <div class="skill-text">Strong communication skills, teamwork, adaptability to fast-paced environments, problem solving</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🛠️ Tools & Technologies</h2>
+        <div style="text-align: center;">
+            <div class="technologies">
+                <span class="tech-tag">Git & GitHub</span>
+                <span class="tech-tag">VS Code</span>
+                <span class="tech-tag">IntelliJ IDEA</span>
+                <span class="tech-tag">Jupyter Notebook</span>
+                <span class="tech-tag">Postman</span>
+                <span class="tech-tag">MySQL Workbench</span>
+                <span class="tech-tag">Bootstrap</span>
+                <span class="tech-tag">Ant Design</span>
+                <span class="tech-tag">RESTful APIs</span>
+                <span class="tech-tag">Agile Development</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
