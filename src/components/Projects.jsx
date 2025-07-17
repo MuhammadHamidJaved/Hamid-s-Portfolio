@@ -1,7 +1,27 @@
-import React from 'react';
-import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
+import React, { useEffect, useRef } from 'react';
+import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 
 const Projects = () => {
+  const projectsRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    const animatedElements = projectsRef.current?.querySelectorAll('.animate-on-scroll');
+    animatedElements?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   const projects = [
     {
       id: 1,
@@ -87,23 +107,23 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="pb-5 bg-light" style={{ paddingTop: '100px' }}>
+    <section id="projects" className="pb-5 bg-light" style={{ paddingTop: '100px' }} ref={projectsRef}>
       <Container>
         <Row>
-          <Col lg={12} className="text-center mb-5">
+          <Col lg={12} className="text-center mb-5 animate-on-scroll">
             <h2 className="display-5 fw-bold">Featured Projects</h2>
             <p className="lead text-muted">A showcase of my recent work and personal projects</p>
           </Col>
         </Row>
         
         <Row>
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <Col lg={4} md={6} className="mb-4" key={project.id}>
-              <Card className="border-0 shadow-sm h-100 project-card">
+              <Card className={`border-0 shadow-sm h-100 project-card animate-on-scroll`} style={{animationDelay: `${index * 0.1}s`}}>
                 <Card.Body className="p-4">
                   <div className="text-center mb-3">
                     <div className="project-icon">
-                      <i className={`${project.image} fa-3x text-primary mb-2`}></i>
+                      <i className={`${project.image} fa-3x text-primary mb-2 pulse-animation`} style={{animationDelay: `${index * 0.3}s`}}></i>
                     </div>
                     <Badge bg="secondary" className="mb-2">{project.category}</Badge>
                   </div>

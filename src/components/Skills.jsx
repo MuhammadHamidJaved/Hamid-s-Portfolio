@@ -1,7 +1,37 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Container, Row, Col, Card, ProgressBar } from 'react-bootstrap';
 
 const Skills = () => {
+  const skillsRef = useRef(null);
+  const [animatedSkills, setAnimatedSkills] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+            // Trigger progress bar animations when skills section comes into view
+            if (entry.target.classList.contains('skills-section')) {
+              setTimeout(() => setAnimatedSkills(true), 500);
+            }
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    const animatedElements = skillsRef.current?.querySelectorAll('.animate-on-scroll');
+    animatedElements?.forEach((el) => observer.observe(el));
+    
+    // Also observe the skills section itself
+    if (skillsRef.current) {
+      observer.observe(skillsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const skillCategories = [
     {
       title: "Machine Learning & AI",
@@ -47,10 +77,10 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="pb-5 skills-section" style={{ paddingTop: '100px' }}>
+    <section id="skills" className="pb-5 skills-section" style={{ paddingTop: '100px' }} ref={skillsRef}>
       <Container>
         <Row>
-          <Col lg={12} className="text-center mb-5">
+          <Col lg={12} className="text-center mb-5 animate-on-scroll">
             <h2 className="display-5 fw-bold">Skills & Technologies</h2>
             <p className="lead text-muted">Technologies I work with to bring ideas to life</p>
           </Col>
@@ -59,10 +89,10 @@ const Skills = () => {
         <Row>
           {skillCategories.map((category, index) => (
             <Col xs={12} md={6} lg={4} className="mb-4" key={index}>
-              <Card className="border-0 shadow-sm h-100">
+              <Card className={`border-0 shadow-sm h-100 animate-on-scroll stagger-${index + 1}`} style={{animationDelay: `${index * 0.2}s`}}>
                 <Card.Body className="p-4">
                   <div className="text-center mb-3">
-                    <i className={`${category.icon} fa-3x text-primary mb-2`}></i>
+                    <i className={`${category.icon} fa-3x text-primary mb-2 pulse-animation`} style={{animationDelay: `${index * 0.5}s`}}></i>
                     <h4>{category.title}</h4>
                   </div>
                   {category.skills.map((skill, skillIndex) => (
@@ -72,9 +102,14 @@ const Skills = () => {
                         <span className="text-muted">{skill.level}%</span>
                       </div>
                       <ProgressBar 
-                        now={skill.level} 
+                        now={animatedSkills ? skill.level : 0}
                         variant="success" 
                         className="skills-progress-bar"
+                        style={{
+                          '--progress-width': `${skill.level}%`,
+                          height: '10px',
+                          borderRadius: '5px'
+                        }}
                       />
                     </div>
                   ))}
