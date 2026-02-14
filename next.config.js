@@ -5,8 +5,6 @@ const nextConfig = {
     domains: [],
     remotePatterns: [],
   },
-  // Enable static optimization
-  output: 'standalone',
 }
 
 module.exports = nextConfig

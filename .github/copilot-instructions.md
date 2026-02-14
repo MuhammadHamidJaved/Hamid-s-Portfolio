@@ -2,12 +2,13 @@
 
 # Muhammad Hamid Javed - Portfolio Project
 
-This is a professional portfolio website built with React, Bootstrap, and Vite. The portfolio showcases Muhammad Hamid Javed's skills as an ML student and full-stack developer.
+This is a professional portfolio website built with React, Bootstrap, and Next.js. The portfolio showcases Muhammad Hamid Javed's skills as an ML student and full-stack developer.
 
 ## Project Structure
-- **React Components**: All components are in `/src/components/`
-- **Styling**: Custom CSS in `App.css` with Bootstrap integration
-- **Technologies**: React, Bootstrap, Font Awesome icons
+- **Next.js App Router**: All pages are in `/app/`
+- **React Components**: Shared components are in `/components/`
+- **Styling**: Custom CSS in `app/globals.css` and `app/styles.css` with Bootstrap integration
+- **Technologies**: Next.js, React, Bootstrap, Font Awesome icons
 
 ## Development Guidelines
 - Use functional components with React hooks
