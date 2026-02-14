@@ -1,86 +1,38 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 
 const Resume = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   
-  // Download resume function
   const handleDownloadResume = async () => {
     setIsDownloading(true);
     
     try {
-      const resumeUrl = `${window.location.origin}/Muhammad_Hamid_Javed_Resume.pdf`;
-      const htmlResumeUrl = `${window.location.origin}/resume-template.html`;
-      
-      // Method 1: Try PDF download first
-      try {
-        const response = await fetch(resumeUrl);
-        if (response.ok) {
-          const blob = await response.blob();
-          // Check if PDF has content (more than 1KB)
-          if (blob.size > 1024) {
-            const url = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'Muhammad_Hamid_Javed_Resume.pdf';
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(url);
-            
-            setTimeout(() => {
-              setIsDownloading(false);
-            }, 1000);
-            
-            console.log('PDF resume download completed successfully');
-            return;
-          } else {
-            console.log('PDF is too small, likely empty. Trying HTML version...');
-          }
-        }
-      } catch (fetchError) {
-        console.log('PDF fetch failed, trying HTML version...');
+      const htmlResumeUrl = `/resume-template.html`;
+      const htmlResponse = await fetch(htmlResumeUrl);
+      if (htmlResponse.ok) {
+        const htmlBlob = await htmlResponse.blob();
+        const url = window.URL.createObjectURL(htmlBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Muhammad_Hamid_Javed_Resume.html';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+        
+        setTimeout(() => {
+          setIsDownloading(false);
+          alert('HTML resume downloaded! You can open it in your browser and print/save as PDF.');
+        }, 1000);
       }
-      
-      // Method 2: Download HTML version and suggest PDF conversion
-      try {
-        const htmlResponse = await fetch(htmlResumeUrl);
-        if (htmlResponse.ok) {
-          const htmlBlob = await htmlResponse.blob();
-          const url = window.URL.createObjectURL(htmlBlob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = 'Muhammad_Hamid_Javed_Resume.html';
-          link.style.display = 'none';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-          
-          setTimeout(() => {
-            setIsDownloading(false);
-            alert('HTML resume downloaded! You can open it in your browser and print/save as PDF, or I can help you convert it to PDF.');
-          }, 1000);
-          
-          console.log('HTML resume download completed successfully');
-          return;
-        }
-      } catch (htmlError) {
-        console.log('HTML version also failed');
-      }
-      
-      // Method 3: Open HTML in new tab as final fallback
-      window.open(htmlResumeUrl, '_blank');
-      setTimeout(() => {
-        setIsDownloading(false);
-        alert('Resume opened in new tab. You can print or save it as PDF from there.');
-      }, 1000);
-      
     } catch (error) {
-      console.error('Error in download function:', error);
+      console.error('Error:', error);
       setIsDownloading(false);
-      alert('Unable to download resume. Please contact me directly for my resume.');
+      alert('Unable to download resume. Please contact me directly.');
     }
   };
 
@@ -90,7 +42,7 @@ const Resume = () => {
       institution: "FAST NUCES, Lahore",
       period: "July 2022 – Present",
       description: "Currently pursuing Computer Science with focus on Machine Learning, Software Engineering, and Data Structures & Algorithms.",
-      grade: "CGPA: 3.38 / 4.0"
+      grade: "CGPA: 3.44 / 4.0"
     },
     {
       degree: "Intermediate",
@@ -110,9 +62,20 @@ const Resume = () => {
 
   const experience = [
     {
+      title: "Associate Software Engineer",
+      company: "DevNuts",
+      period: "August 2025 - Present",
+      description: "Working as Associate Software Engineer developing modern web applications and assisting on mobile app development.",
+      achievements: [
+        "Developing web applications using modern frameworks and technologies",
+        "Collaborating on mobile app development and feature implementation",
+        "Contributing to full-stack development projects and client solutions"
+      ]
+    },
+    {
       title: "Software Development Intern",
       company: "Analyzinn Solutions",
-      period: "July, 2024 - August, 2024",
+      period: "July 2024 - August 2024",
       description: "Completed software development internship gaining hands-on experience in modern web technologies and business solutions.",
       achievements: [
         "Developed web applications using React and Node.js",
@@ -134,6 +97,12 @@ const Resume = () => {
   ];
 
   const certifications = [
+    {
+      name: "Associate Software Engineer",
+      issuer: "DevNuts",
+      date: "2025 - Present",
+      credentialId: "Employment Certificate"
+    },
     {
       name: "Software Engineer Intern",
       issuer: "Analyzinn Solutions",
@@ -213,13 +182,13 @@ const Resume = () => {
       name: "Ticket Management System",
       technologies: ["React", "Node.js", "Express", "SQL Server", "JavaScript", "Bootstrap", "RESTful API"],
       description: "Comprehensive multi-service booking platform supporting movies, transportation, tours, and events with full-stack architecture and database management.",
-      highlights: ["Multi-service booking system (movies, buses, trains, flights)", "User authentication and role management", "SQL Server database with stored procedures", "RESTful API design", "Real-time booking management"]
+      highlights: ["Multi-service booking system", "User authentication and role management", "SQL Server database with stored procedures", "RESTful API design"]
     },
     {
       name: "Social Network App",
       technologies: ["C++", "Object-Oriented Programming", "File I/O", "Data Structures", "Polymorphism"],
       description: "Console-based social networking application demonstrating advanced OOP concepts with comprehensive user management and social interaction features.",
-      highlights: ["User friend management system", "Page likes and timeline functionality", "Post creation, commenting, and liking system", "Memory sharing features", "File-based data persistence", "Advanced C++ OOP implementation"]
+      highlights: ["User friend management system", "Post creation, commenting, and liking", "Memory sharing features", "File-based data persistence"]
     }
   ];
 
@@ -254,7 +223,6 @@ const Resume = () => {
           </Col>
         </Row>
 
-        {/* Education */}
         <Row className="mb-5">
           <Col lg={12}>
             <h3 className="mb-4">
@@ -285,7 +253,6 @@ const Resume = () => {
           </Col>
         </Row>
 
-        {/* Experience */}
         <Row className="mb-5">
           <Col lg={12}>
             <h3 className="mb-4">
@@ -319,7 +286,6 @@ const Resume = () => {
           </Col>
         </Row>
 
-        {/* Projects */}
         <Row className="mb-5">
           <Col lg={12}>
             <h3 className="mb-4">
@@ -367,7 +333,6 @@ const Resume = () => {
           </Col>
         </Row>
 
-        {/* Certifications */}
         <Row>
           <Col lg={12}>
             <h3 className="mb-4">
